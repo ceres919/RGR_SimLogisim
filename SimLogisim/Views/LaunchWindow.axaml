@@ -1,0 +1,61 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="using:SimLogisim.ViewModels"
+		xmlns:conv="clr-namespace:SimLogisim.Converters"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+		MaxHeight="500" MaxWidth="700"
+        x:Class="SimLogisim.Views.LaunchWindow"
+        Title="LaunchWindow">
+	<Design.DataContext>
+		<vm:LaunchWindowViewModel/>
+	</Design.DataContext>
+
+	<Window.Resources>
+		<conv:DateTimeConverter x:Key="dateConverter"/>
+	</Window.Resources>
+
+	<Window.Styles>
+		<Style Selector="TextBlock">
+			<Setter Property="FontSize" Value="16"/>
+		</Style>
+		<Style Selector="Button">
+			<Setter Property="Height" Value="50"/>
+			<Setter Property="Width" Value="250"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+			<Setter Property="HorizontalContentAlignment" Value="Center"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+			<Setter Property="FontSize" Value="18"/>
+			<Setter Property="FontFamily" Value="Corbel"/>
+			<Setter Property="FontWeight" Value="Medium"/>
+			<Setter Property="Background" Value="WhiteSmoke"/>
+			<Setter Property="BorderBrush" Value="LightGray"/>
+			<Setter Property="BorderThickness" Value="1"/>
+		</Style>
+	</Window.Styles>
+	<Grid ColumnDefinitions="*,0.6*" RowDefinitions="auto,auto,*">
+		<TextBlock Classes="t1" Text="SimLogisim" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0"
+				   FontSize="24" FontWeight="Medium" FontFamily="Corbel" Margin="15 15 0 20"
+				   HorizontalAlignment="Stretch" TextAlignment="Left" VerticalAlignment="Center"/>
+		<TextBlock Text="Открыть последние" Grid.Column="0" Grid.Row="1" Margin="5 0 0 5"/>
+		<TextBlock Text="Начало работы" Grid.Column="1" Grid.Row="1" Margin="5 0 0 5"/>
+		<ListBox Grid.Column="0" Grid.Row="2" Items="{Binding ProjectsCollection}" SelectedItem="{Binding SelectedProject}"
+				 Background="White" DoubleTapped="LoadExistingProject">
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<Grid ColumnDefinitions="*,*">
+						<TextBlock Grid.Column="0" Text="{Binding Name}"/>
+						<TextBlock Grid.Column="1" Text="{Binding DateOfVisit, Converter={StaticResource dateConverter}}" HorizontalAlignment="Right"/>
+					</Grid>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
+		<StackPanel Grid.Column="1" Grid.Row="2">
+			<Button Content="Создать новый проект"/>
+			<Button Content="Открыть проект"/>
+			<Button Content="Выйти"/>
+		</StackPanel>
+	</Grid>
+</Window>

@@ -8,12 +8,75 @@
         Icon="/Assets/avalonia-logo.ico"
         Title="SimLogisim">
 
-    <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
+	<Design.DataContext>
+		<!-- This only sets the DataContext for the previewer in an IDE,
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-        <vm:MainWindowViewModel/>
-    </Design.DataContext>
+		<vm:MainWindowViewModel/>
+	</Design.DataContext>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+	<Window.Styles>
 
+		<Style Selector="Image.h1">
+			<Setter Property="Width" Value="28"/>
+			<Setter Property="Height" Value="28"/>
+			<Setter Property="HorizontalAlignment" Value="Center"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+		</Style>
+		<Style Selector="Button.b2">
+			<Setter Property="HorizontalAlignment" Value="Right"/>
+			<Setter Property="HorizontalContentAlignment" Value="Center"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="Background" Value="MintCream"/>
+		</Style>
+	</Window.Styles>
+
+	<DockPanel>
+		<Menu DockPanel.Dock="Top" BorderBrush="Gray" BorderThickness="1">
+			<MenuItem Name="menu" Header="Проект">
+				<MenuItem Header="Создать"/>
+				<MenuItem Header="Открыть"/>
+				<MenuItem Header="Сохранить"/>
+				<MenuItem Header="Выйти"/>
+			</MenuItem>
+			<MenuItem Name="Elements" Header="Добавить элемент">
+				<MenuItem Header="ENTER"/>
+				<MenuItem Header="EXIT"/>
+				<MenuItem Header="AND"/>
+				<MenuItem Header="OR"/>
+				<MenuItem Header="NOT"/>
+				<MenuItem Header="XOR"/>
+				<MenuItem Header="SUM"/>
+			</MenuItem>
+		</Menu>
+		<Grid ColumnDefinitions="0.5*,*">
+			<ListBox Name="listBoxElements" Grid.Column="0" Background="MintCream" BorderBrush="CadetBlue" BorderThickness="1"
+						Items="{Binding ElementsCollection}" SelectedItem="{Binding SelectedCircuit}">
+				<ListBox.ItemTemplate>
+					<DataTemplate>
+						<Grid ColumnDefinitions="*,*">
+							<TextBlock Grid.Column="0" Text="{Binding Name}"/>
+							<Button Name="buttonDeleteCircuit" Classes="b2" Content="-" Grid.Column="1" Background="PaleTurquoise"
+									Command="{Binding #mainWindow.DataContext.DeleteButton}" CommandParameter="{Binding }"/>
+						</Grid>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
+
+			<ItemsControl Grid.Column="1" DragDrop.AllowDrop="True"
+					  Items="{Binding Elements}"
+					  >
+				<!--PointerPressed="OnPointerPressed"-->
+				<ItemsControl.ItemsPanel>
+					<ItemsPanelTemplate>
+						<Canvas Name="highLevelCanvas" ClipToBounds="True" DragDrop.AllowDrop="True" Background="Beige"/>
+					</ItemsPanelTemplate>
+				</ItemsControl.ItemsPanel>
+
+				<ItemsControl.DataTemplates>
+
+				</ItemsControl.DataTemplates>
+			</ItemsControl>
+		</Grid>
+	</DockPanel>
+	
 </Window>
