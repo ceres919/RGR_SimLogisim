@@ -68,7 +68,7 @@
 				<!--PointerPressed="OnPointerPressed"-->
 				<ItemsControl.ItemsPanel>
 					<ItemsPanelTemplate>
-						<Canvas Name="highLevelCanvas" ClipToBounds="True" DragDrop.AllowDrop="True" Background="Beige"/>
+						<Canvas Name="highLevelCanvas" ClipToBounds="True" DragDrop.AllowDrop="True" Background="Cornsilk"/>
 					</ItemsPanelTemplate>
 				</ItemsControl.ItemsPanel>
 
