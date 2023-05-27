@@ -1,4 +1,8 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ArrayOfProjectEntity>
-
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfProjectEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ProjectEntity>
+    <Name>NewererProject</Name>
+    <DateOfVisit>2023-05-28T00:03:24.5356938+07:00</DateOfVisit>
+    <FileName>E:\NEED\UNIVER\Визуальное программирование\prj.json</FileName>
+  </ProjectEntity>
 </ArrayOfProjectEntity>

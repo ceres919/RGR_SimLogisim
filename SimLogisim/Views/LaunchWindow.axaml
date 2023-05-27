@@ -54,9 +54,9 @@
 			</ListBox.ItemTemplate>
 		</ListBox>
 		<StackPanel Grid.Column="1" Grid.Row="2">
-			<Button Content="Создать новый проект"/>
-			<Button Content="Открыть проект"/>
-			<Button Content="Выйти"/>
+			<Button Content="Создать новый проект" Click="CreateNewProject"/>
+			<Button Content="Открыть проект" Click="OpenFileDialogMenu"/>
+			<Button Content="Выйти" Click="ExitProgramm"/>
 		</StackPanel>
 	</Grid>
 </Window>

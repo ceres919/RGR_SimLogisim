@@ -32,11 +32,12 @@
 
 	<DockPanel>
 		<Menu DockPanel.Dock="Top" BorderBrush="Gray" BorderThickness="1">
-			<MenuItem Name="menu" Header="Проект">
-				<MenuItem Header="Создать"/>
-				<MenuItem Header="Открыть"/>
-				<MenuItem Header="Сохранить"/>
-				<MenuItem Header="Выйти"/>
+			<MenuItem Name="Menu" Header="Проект">
+				<MenuItem Header="Добавить схему" Command="{Binding AddNewCircuit}"/>
+				<MenuItem Header="Создать" Click="CreateNewProject"/>
+				<MenuItem Header="Открыть" Click="OpenFileDialogMenu"/>
+				<MenuItem Header="Сохранить" Click="SaveFileDialogMenu"/>
+				<MenuItem Header="Выйти" Click="ExitProgramm"/>
 			</MenuItem>
 			<MenuItem Name="Elements" Header="Добавить элемент">
 				<MenuItem Header="ENTER"/>
@@ -49,21 +50,28 @@
 			</MenuItem>
 		</Menu>
 		<Grid ColumnDefinitions="0.5*,*">
-			<ListBox Name="listBoxElements" Grid.Column="0" Background="MintCream" BorderBrush="CadetBlue" BorderThickness="1"
-						Items="{Binding ElementsCollection}" SelectedItem="{Binding SelectedCircuit}">
-				<ListBox.ItemTemplate>
-					<DataTemplate>
-						<Grid ColumnDefinitions="*,*">
-							<TextBlock Grid.Column="0" Text="{Binding Name}"/>
-							<Button Name="buttonDeleteCircuit" Classes="b2" Content="-" Grid.Column="1" Background="PaleTurquoise"
-									Command="{Binding #mainWindow.DataContext.DeleteButton}" CommandParameter="{Binding }"/>
-						</Grid>
-					</DataTemplate>
-				</ListBox.ItemTemplate>
-			</ListBox>
+			<StackPanel Grid.Column="0">
+				<TextBox Text="{Binding ProjectName}"/>
+				<Grid ColumnDefinitions="auto,*" Orientation="Horizontal">
+					<TextBlock Grid.Column="0" Text="Текущая схема:" VerticalAlignment="Center"/>
+					<TextBox Grid.Column="1" Text="{Binding CurrentCircuitName}" Margin="5 0 0 0" HorizontalAlignment="Stretch"/>
+				</Grid>
+				<ListBox Name="listBoxCircuits" Background="MintCream" BorderBrush="CadetBlue" BorderThickness="1"
+							Items="{Binding CircuitsCollection}" SelectedItem="{Binding SelectedCircuit}">
+					<ListBox.ItemTemplate>
+						<DataTemplate>
+							<Grid ColumnDefinitions="*,*">
+								<TextBlock Grid.Column="0" Text="{Binding Name}"/>
+								<Button Name="buttonDeleteCircuit" Classes="b2" Content="-" Grid.Column="1" Background="CornflowerBlue"
+										Command="{Binding #mainWindow.DataContext.DeleteButton}" CommandParameter="{Binding }"/>
+							</Grid>
+						</DataTemplate>
+					</ListBox.ItemTemplate>
+				</ListBox>
+			</StackPanel>
 
 			<ItemsControl Grid.Column="1" DragDrop.AllowDrop="True"
-					  Items="{Binding Elements}"
+					  Items="{Binding SelectedCircuit}"
 					  >
 				<!--PointerPressed="OnPointerPressed"-->
 				<ItemsControl.ItemsPanel>

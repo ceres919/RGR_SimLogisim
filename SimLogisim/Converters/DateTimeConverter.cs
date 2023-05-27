@@ -14,7 +14,7 @@ namespace SimLogisim.Converters
         {
             if (value is DateTime date && targetType.IsAssignableTo(typeof(string)) == true)
             {
-                var date_only = date.ToString("dd.MM.yyyy HH:MM");
+                var date_only = date.ToString("dd.MM.yyyy HH:mm");
                 return date_only;
             }
             return null;
