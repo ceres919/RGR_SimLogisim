@@ -52,7 +52,7 @@
 		<Grid ColumnDefinitions="0.5*,*">
 			<StackPanel Grid.Column="0">
 				<TextBox Text="{Binding ProjectName}"/>
-				<Grid ColumnDefinitions="auto,*" Orientation="Horizontal">
+				<Grid ColumnDefinitions="auto,*">
 					<TextBlock Grid.Column="0" Text="Текущая схема:" VerticalAlignment="Center"/>
 					<TextBox Grid.Column="1" Text="{Binding CurrentCircuitName}" Margin="5 0 0 0" HorizontalAlignment="Stretch"/>
 				</Grid>
