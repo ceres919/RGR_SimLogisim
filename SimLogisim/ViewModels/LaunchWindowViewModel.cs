@@ -1,5 +1,6 @@
 ﻿using ReactiveUI;
 using SimLogisim.Models;
+using SimLogisim.Models.LoadAndSave;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,8 +17,8 @@ namespace SimLogisim.ViewModels
         public LaunchWindowViewModel()
         {
             //ProjectsCollection = new ObservableCollection<ProjectEntity>();
-            //XMLLoader loader = new XMLLoader();
-            //ProjectsCollection = new ObservableCollection<ProjectEntity>(loader.Load("../../../ProjectsStorage.xml"));
+            XMLLoader loader = new XMLLoader();
+            ProjectsCollection = new ObservableCollection<ProjectEntity>(loader.Load("../../../ProjectsStorage.xml"));
             //ProjectsCollection.Add(
             //    new ProjectEntity()
             //    {
