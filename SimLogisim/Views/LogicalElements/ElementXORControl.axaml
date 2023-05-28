@@ -1,0 +1,55 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:SimLogisim.Views.LogicalElements">
+  <Design.PreviewWith>
+    <controls:ElementXORControl />
+  </Design.PreviewWith>
+
+	<Style Selector="TextBlock.c1">
+		<Setter Property="FontSize" Value="22"/>
+		<Setter Property="FontWeight" Value="UltraBold"/>
+		<Setter Property="Foreground" Value="Black"/>
+		<Setter Property="VerticalAlignment" Value="Top"/>
+		<Setter Property="HorizontalAlignment" Value="Right"/>
+	</Style>
+	
+  <Style Selector="controls|ElementXORControl">
+    <Setter Property="Template">
+      <ControlTemplate>
+		  <Canvas Name="XOR" Width="120" Height="80" Background="Transparent">
+			  <Border Width="70" Height="70"
+						 Background="LightBlue"
+						 BorderBrush="Black"
+						 BorderThickness="3"
+						  CornerRadius="5">
+				  <TextBlock Classes="c1" Text="XOR"/>
+				  <Border.RenderTransform>
+					  <TranslateTransform X="25" Y="5"/>
+				  </Border.RenderTransform>
+			  </Border>
+			  <Line StartPoint="5,25" EndPoint="25,25"
+					Stroke="Black" StrokeThickness="3"/>
+			  <Line StartPoint="5,55" EndPoint="25,55"
+					Stroke="Black" StrokeThickness="3"/>
+			  <Line StartPoint="95,40" EndPoint="115,40"
+					Stroke="Black" StrokeThickness="3"/>
+			  <Ellipse Name="Enter0" Fill="Black" Height="10" Width="10">
+				  <Ellipse.RenderTransform>
+					  <TranslateTransform X="0" Y="20"/>
+				  </Ellipse.RenderTransform>
+			  </Ellipse>
+			  <Ellipse Name="Enter1" Fill="Black" Height="10" Width="10">
+				  <Ellipse.RenderTransform>
+					  <TranslateTransform X="0" Y="50"/>
+				  </Ellipse.RenderTransform>
+			  </Ellipse>
+			  <Ellipse Name="Exit0" Fill="Black" Height="10" Width="10">
+				  <Ellipse.RenderTransform>
+					  <TranslateTransform X="110" Y="35"/>
+				  </Ellipse.RenderTransform>
+			  </Ellipse>
+		  </Canvas>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+</Styles>

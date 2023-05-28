@@ -1,5 +1,6 @@
 ﻿using Avalonia.Controls.Shapes;
 using DynamicData.Binding;
+using SimLogisim.Models.LogicalElements;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -19,7 +20,6 @@ namespace SimLogisim.Models
             get => name;
             set => SetAndRaise(ref name, value);
         }
-        //= DateTime.Now;
         public ObservableCollection<IShape> Elemets
         {
             get => elemets;

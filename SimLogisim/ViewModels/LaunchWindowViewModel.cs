@@ -22,7 +22,7 @@ namespace SimLogisim.ViewModels
             //ProjectsCollection = new ObservableCollection<ProjectEntity>();
             XMLLoader loader = new XMLLoader();
             projectsCollection = new ObservableCollection<ProjectEntity>(loader.Load("../../../ProjectsStorage.xml"));
-            ProjectsCollection = new ObservableCollection<ProjectEntity>(projectsCollection.OrderBy(p => p.DateOfVisit));
+            ProjectsCollection = new ObservableCollection<ProjectEntity>(projectsCollection.OrderBy(p => p.DateOfVisit).Reverse());
         }
 
         public ProjectEntity LoadProject()
@@ -42,6 +42,7 @@ namespace SimLogisim.ViewModels
             JSONLoader loader = new JSONLoader();
             XMLSaver saver = new XMLSaver();
             ProjectEntity project = loader.Load(path);
+            project.DateOfVisit = DateTime.Now;
             foreach (var item in projectsCollection)
             {
                 if(item.Name == project.Name && item.FileName == project.FileName)
@@ -50,10 +51,9 @@ namespace SimLogisim.ViewModels
                     var index = ProjectsCollection.IndexOf(item);
                     ProjectsCollection.Move(index, 0);
                     saver.Save(ProjectsCollection, "../../../ProjectsStorage.xml");
-                    return item;
+                    return project;
                 }
             }
-            project.DateOfVisit = DateTime.Now;
             ProjectsCollection.Insert(0, project);
             saver.Save(ProjectsCollection, "../../../ProjectsStorage.xml");
             return project;

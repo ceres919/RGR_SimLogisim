@@ -38,7 +38,7 @@
 	</Window.Styles>
 	<Grid ColumnDefinitions="*,0.6*" RowDefinitions="auto,auto,*">
 		<TextBlock Classes="t1" Text="SimLogisim" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0"
-				   FontSize="24" FontWeight="Medium" FontFamily="Corbel" Margin="15 15 0 20"
+				   FontSize="24" FontWeight="Medium" Margin="15 15 0 20"
 				   HorizontalAlignment="Stretch" TextAlignment="Left" VerticalAlignment="Center"/>
 		<TextBlock Text="Открыть последние" Grid.Column="0" Grid.Row="1" Margin="5 0 0 5"/>
 		<TextBlock Text="Начало работы" Grid.Column="1" Grid.Row="1" Margin="5 0 0 5"/>
@@ -47,7 +47,7 @@
 			<ListBox.ItemTemplate>
 				<DataTemplate>
 					<Grid ColumnDefinitions="*,*">
-						<TextBlock Grid.Column="0" Text="{Binding Name}"/>
+						<TextBlock Grid.Column="0" Text="{Binding Name}" HorizontalAlignment="Left"/>
 						<TextBlock Grid.Column="1" Text="{Binding DateOfVisit, Converter={StaticResource dateConverter}}" HorizontalAlignment="Right"/>
 					</Grid>
 				</DataTemplate>

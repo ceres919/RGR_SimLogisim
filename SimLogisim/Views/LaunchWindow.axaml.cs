@@ -5,6 +5,7 @@ using Avalonia.Interactivity;
 using Avalonia.VisualTree;
 using SimLogisim.Models;
 using SimLogisim.Models.LoadAndSave;
+using SimLogisim.Models.LogicalElements;
 using SimLogisim.ViewModels;
 using System;
 using System.Collections.ObjectModel;

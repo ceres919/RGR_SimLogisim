@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SimLogisim.Models
+namespace SimLogisim.Models.LogicalElements
 {
     public abstract class IShape : AbstractNotifyPropertyChanged
     {

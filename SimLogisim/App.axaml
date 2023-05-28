@@ -8,5 +8,12 @@
 
     <Application.Styles>
         <FluentTheme Mode="Light"/>
-    </Application.Styles>
+		<StyleInclude Source="/Views/LogicalElements/ElementANDControl.axaml"/>
+		<StyleInclude Source="/Views/LogicalElements/ElementORControl.axaml"/>
+		<StyleInclude Source="/Views/LogicalElements/ElementNOTControl.axaml"/>
+		<StyleInclude Source="/Views/LogicalElements/ElementXORControl.axaml"/>
+		<StyleInclude Source="/Views/LogicalElements/ElementSUMControl.axaml"/>
+		<StyleInclude Source="/Views/LogicalElements/ElementENTERControl.axaml"/>
+		<StyleInclude Source="/Views/LogicalElements/ElementEXITControl.axaml"/>
+	</Application.Styles>
 </Application>

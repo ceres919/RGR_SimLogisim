@@ -4,8 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+		xmlns:elem="clr-namespace:SimLogisim.Models.LogicalElements"
+		xmlns:elem_control="clr-namespace:SimLogisim.Views.LogicalElements"
         x:Class="SimLogisim.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
+		Name="mainWindow"
         Title="SimLogisim">
 
 	<Design.DataContext>
@@ -40,30 +43,30 @@
 				<MenuItem Header="Выйти" Click="ExitProgramm"/>
 			</MenuItem>
 			<MenuItem Name="Elements" Header="Добавить элемент">
-				<MenuItem Header="ENTER"/>
-				<MenuItem Header="EXIT"/>
-				<MenuItem Header="AND"/>
-				<MenuItem Header="OR"/>
-				<MenuItem Header="NOT"/>
-				<MenuItem Header="XOR"/>
-				<MenuItem Header="SUM"/>
+				<MenuItem Header="ENTER" Command="{Binding AddNewElement}" CommandParameter="enter"/>
+				<MenuItem Header="EXIT" Command="{Binding AddNewElement}" CommandParameter="exit"/>
+				<MenuItem Header="AND" Command="{Binding AddNewElement}" CommandParameter="and"/>
+				<MenuItem Header="OR" Command="{Binding AddNewElement}" CommandParameter="or"/>
+				<MenuItem Header="NOT" Command="{Binding AddNewElement}" CommandParameter="not"/>
+				<MenuItem Header="XOR" Command="{Binding AddNewElement}" CommandParameter="xor"/>
+				<MenuItem Header="SUM" Command="{Binding AddNewElement}" CommandParameter="sum"/>
 			</MenuItem>
 		</Menu>
 		<Grid ColumnDefinitions="0.5*,*">
-			<StackPanel Grid.Column="0">
+			<StackPanel Grid.Column="0" Background="AliceBlue">
 				<TextBox Text="{Binding ProjectName}"/>
 				<Grid ColumnDefinitions="auto,*">
 					<TextBlock Grid.Column="0" Text="Текущая схема:" VerticalAlignment="Center"/>
 					<TextBox Grid.Column="1" Text="{Binding CurrentCircuitName}" Margin="5 0 0 0" HorizontalAlignment="Stretch"/>
 				</Grid>
-				<ListBox Name="listBoxCircuits" Background="MintCream" BorderBrush="CadetBlue" BorderThickness="1"
+				<ListBox Name="listBoxCircuits" Background="AliceBlue" BorderBrush="CadetBlue" BorderThickness="1"
 							Items="{Binding CircuitsCollection}" SelectedItem="{Binding SelectedCircuit}">
 					<ListBox.ItemTemplate>
 						<DataTemplate>
 							<Grid ColumnDefinitions="*,*">
 								<TextBlock Grid.Column="0" Text="{Binding Name}"/>
 								<Button Name="buttonDeleteCircuit" Classes="b2" Content="-" Grid.Column="1" Background="CornflowerBlue"
-										Command="{Binding #mainWindow.DataContext.DeleteButton}" CommandParameter="{Binding }"/>
+										Command="{Binding #mainWindow.DataContext.DeleteCircuitButton}" CommandParameter="{Binding }"/>
 							</Grid>
 						</DataTemplate>
 					</ListBox.ItemTemplate>
@@ -71,17 +74,92 @@
 			</StackPanel>
 
 			<ItemsControl Grid.Column="1" DragDrop.AllowDrop="True"
-					  Items="{Binding SelectedCircuit}"
-					  >
-				<!--PointerPressed="OnPointerPressed"-->
+					  Items="{Binding ElementsCollection}"
+					  PointerPressed="OnPointerPressed">
 				<ItemsControl.ItemsPanel>
 					<ItemsPanelTemplate>
-						<Canvas Name="highLevelCanvas" ClipToBounds="True" DragDrop.AllowDrop="True" Background="Cornsilk"/>
+						<Canvas Name="highLevelCanvas" ClipToBounds="True" DragDrop.AllowDrop="True" Background="White"/>
 					</ItemsPanelTemplate>
 				</ItemsControl.ItemsPanel>
-
 				<ItemsControl.DataTemplates>
+					
+					<DataTemplate DataType="{x:Type	elem:Connector}">
+						<Line StartPoint="{Binding StartPoint}"
+							  EndPoint="{Binding EndPoint}"
+							  Stroke="Black"
+							  StrokeThickness="5"
+							  Tapped="DeleteElement"/>
+					</DataTemplate>
 
+					<DataTemplate DataType="{x:Type	elem:ElementAND}">
+						<elem_control:ElementANDControl Tapped="DeleteElement">
+							<elem_control:ElementANDControl.RenderTransform>
+								<TranslateTransform X="{Binding StartPoint.X}"
+													Y="{Binding StartPoint.Y}"/>
+							</elem_control:ElementANDControl.RenderTransform>
+
+						</elem_control:ElementANDControl>
+					</DataTemplate>
+
+					<DataTemplate DataType="{x:Type	elem:ElementOR}">
+						<elem_control:ElementORControl Tapped="DeleteElement">
+							<elem_control:ElementORControl.RenderTransform>
+								<TranslateTransform X="{Binding StartPoint.X}"
+													Y="{Binding StartPoint.Y}"/>
+							</elem_control:ElementORControl.RenderTransform>
+
+						</elem_control:ElementORControl>
+					</DataTemplate>
+
+					<DataTemplate DataType="{x:Type	elem:ElementNOT}">
+						<elem_control:ElementNOTControl Tapped="DeleteElement">
+							<elem_control:ElementNOTControl.RenderTransform>
+								<TranslateTransform X="{Binding StartPoint.X}"
+													Y="{Binding StartPoint.Y}"/>
+							</elem_control:ElementNOTControl.RenderTransform>
+
+						</elem_control:ElementNOTControl>
+					</DataTemplate>
+					
+					<DataTemplate DataType="{x:Type	elem:ElementXOR}">
+						<elem_control:ElementXORControl Tapped="DeleteElement">
+							<elem_control:ElementXORControl.RenderTransform>
+								<TranslateTransform X="{Binding StartPoint.X}"
+													Y="{Binding StartPoint.Y}"/>
+							</elem_control:ElementXORControl.RenderTransform>
+
+						</elem_control:ElementXORControl>
+					</DataTemplate>
+
+					<DataTemplate DataType="{x:Type	elem:ElementSUM}">
+						<elem_control:ElementSUMControl Tapped="DeleteElement">
+							<elem_control:ElementSUMControl.RenderTransform>
+								<TranslateTransform X="{Binding StartPoint.X}"
+													Y="{Binding StartPoint.Y}"/>
+							</elem_control:ElementSUMControl.RenderTransform>
+
+						</elem_control:ElementSUMControl>
+					</DataTemplate>
+
+					<DataTemplate DataType="{x:Type	elem:ElementENTER}">
+						<elem_control:ElementENTERControl Tapped="ChangeEnterValue">
+							<elem_control:ElementENTERControl.RenderTransform>
+								<TranslateTransform X="{Binding StartPoint.X}"
+													Y="{Binding StartPoint.Y}"/>
+							</elem_control:ElementENTERControl.RenderTransform>
+
+						</elem_control:ElementENTERControl>
+					</DataTemplate>
+
+					<DataTemplate DataType="{x:Type	elem:ElementEXIT}">
+						<elem_control:ElementEXITControl Tapped="DeleteElement">
+							<elem_control:ElementEXITControl.RenderTransform>
+								<TranslateTransform X="{Binding StartPoint.X}"
+													Y="{Binding StartPoint.Y}"/>
+							</elem_control:ElementEXITControl.RenderTransform>
+
+						</elem_control:ElementEXITControl>
+					</DataTemplate>
 				</ItemsControl.DataTemplates>
 			</ItemsControl>
 		</Grid>
